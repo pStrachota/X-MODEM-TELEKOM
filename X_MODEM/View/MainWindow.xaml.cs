@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace X_MODEM
 {
@@ -23,6 +24,7 @@ namespace X_MODEM
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new XModemViewModel();
         }
     }
 }
