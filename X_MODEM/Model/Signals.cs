@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSHARP_PW_PROJECT.Model
+namespace Model
 {
     static class Signals
     {
