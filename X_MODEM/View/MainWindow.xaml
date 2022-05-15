@@ -12,8 +12,8 @@
         <GroupBox Height="414" Header="SEND" Width="488" Canvas.Top="10" Canvas.Left="24" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White">
             <Canvas>
                 <TextBox  TextWrapping="Wrap" Height="176" FontSize="16" HorizontalAlignment="Left" Width="425" Canvas.Left="13" Canvas.Top="99" VerticalAlignment="Center" Text="{Binding SenderTextBox}"/>
-                <Button Command="{Binding Send}" x:Name="Send" Content="Send" Canvas.Left="70" Canvas.Top="304" Height="46" Width="75" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button  Command="{Binding OpenFile}" x:Name="Send_Copy" Content="Open file" Canvas.Left="275" Canvas.Top="305" Height="45" Width="85" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
+                <Button Command="{Binding Send}" x:Name="Send" Content="Send" Canvas.Left="56" Canvas.Top="300" Height="46" Width="75" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button  Command="{Binding OpenFile}" x:Name="Send_Copy" Content="Open file" Canvas.Left="318" Canvas.Top="304" Height="45" Width="85" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
                 <ComboBox x:Name="PORTS" Canvas.Left="10" Canvas.Top="40" Width="120"
             ItemsSource="{Binding ComPorts}"
                 SelectedItem="{Binding SelectedSenderCom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -23,6 +23,8 @@
                 <Label Content="Baud rate" Canvas.Left="158" Foreground="White" HorizontalAlignment="Left" Canvas.Top="-3" VerticalAlignment="Top"/>
                 <ComboBox x:Name="BAUD_RATE_Copy" Canvas.Left="318" Canvas.Top="40" Width="120"
             ItemsSource="{Binding Checksum}" SelectedItem="{Binding SelectedSenderChecksum}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Command="{Binding ClearTextboxSender}" Content="clear textbox" Canvas.Left="165" Canvas.Top="309" FontSize="16" Height="32" Width="114"/>
+
             </Canvas>
 
 
@@ -30,7 +32,7 @@
         <GroupBox Height="414" Header="RECEIVE" Width="461" Canvas.Top="10" Canvas.Left="553" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
             <Canvas Margin="0,-19,0,0">
                 <TextBox Text="{Binding ReceiverTextBox}" TextWrapping="Wrap" Height="176" FontSize="16" HorizontalAlignment="Left" Width="394" Canvas.Left="29" Canvas.Top="120" VerticalAlignment="Center"/>
-                <Button Command="{Binding Receive}" x:Name="Send1" Content="Receive" Canvas.Left="197" Canvas.Top="318" Height="45" Width="76" FontSize="20"/>
+                <Button Command="{Binding Receive}" x:Name="Send1" Content="Receive" Canvas.Left="89" Canvas.Top="317" Height="45" Width="76" FontSize="20"/>
                 <ComboBox x:Name="PORTS_Copy" Canvas.Left="10" Canvas.Top="55" Width="120"
             ItemsSource="{Binding ComPorts}"
             SelectedItem="{Binding SelectedReceiverCom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -41,6 +43,8 @@
                 <ComboBox x:Name="BAUD_RATE_Copy2" Canvas.Left="306" Canvas.Top="55" Width="120"
             ItemsSource="{Binding Checksum}" SelectedItem="{Binding SelectedReceiverChecksum}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="Checksum" Canvas.Left="306" Foreground="White" Canvas.Top="7" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Command="{Binding ClearTextboxReceiver}" Content="clear textbox" Canvas.Left="226" Canvas.Top="323" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33" Width="116"/>
+
             </Canvas>
 
 

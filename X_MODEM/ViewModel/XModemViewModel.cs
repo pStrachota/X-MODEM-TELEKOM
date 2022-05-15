@@ -54,6 +54,16 @@ namespace ViewModel
                 SenderTextBox = File.ReadAllText(openFileDialog.FileName);
             });
 
+            ClearTextboxSender = new RelayCommand(() =>
+            {
+                SenderTextBox = "";
+            });
+
+            ClearTextboxReceiver = new RelayCommand(() =>
+            {
+                ReceiverTextBox = "";
+            });
+            
             Send = new RelayCommand(() =>
             {
                 if (_transmitter == null || _selectedSenderCom == null)
@@ -241,7 +251,8 @@ namespace ViewModel
                 RaisePropertyChanged(nameof(ReceiverTextBox));
             }
         }
-
+        public ICommand ClearTextboxSender { get; set; }
+        public ICommand ClearTextboxReceiver { get; set; }
         public ICommand OpenFile { get; set; }
         public ICommand Send { get; set; }
         public ICommand Receive { get; set; }
