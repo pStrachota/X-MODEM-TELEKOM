@@ -7,6 +7,9 @@ namespace Model
 {
     internal class Transmitter
     {
+
+        private readonly int CRC_16_CCITT = 0;
+        private readonly int ALGEBRAIC = 1;
         private SerialPort _portNumber;
 
         public Transmitter(string portName, int baudrate)
@@ -32,13 +35,13 @@ namespace Model
                     _portNumber.Open();
                 using (_portNumber)
                 {
-                    if (checksumMode == 0)
+                    if (checksumMode == CRC_16_CCITT)
                     {
                         while (Convert.ToInt32(_portNumber.ReadLine()) != Signals.C)
                         {
                         }
                     }
-                    else
+                    else if (checksumMode == ALGEBRAIC)
                     {
                         while (Convert.ToInt32(_portNumber.ReadLine()) != Signals.NAK)
                         {
@@ -70,7 +73,7 @@ namespace Model
                                 sentBytes[j] = bytesToSend[i * 128 + j];
                             }
 
-                            if (checksumMode == 0)
+                            if (checksumMode == CRC_16_CCITT)
                             {
                                 byte[] crc = Checksum.CreateCheckSumCRC(sentBytes);
                                 for (int j = 0; j < 2; j++)
@@ -78,7 +81,7 @@ namespace Model
                                     _portNumber.Write(Convert.ToChar(crc[j]).ToString());
                                 }
                             }
-                            else
+                            else if (checksumMode == ALGEBRAIC)
                             {
                                 byte basic = Checksum.AlgebraicChecksum(sentBytes);
                                 _portNumber.Write(Convert.ToChar(Convert.ToChar(basic)).ToString());

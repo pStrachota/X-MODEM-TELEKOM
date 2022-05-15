@@ -27,10 +27,10 @@ namespace Model
                 checksumCRC = checksumCRC ^ _byte << 8;
                 for (int i = 0; i < 8; i++)
                 {
-                    if (Convert.ToBoolean(checksumCRC & 0x8000))
-                        checksumCRC = (checksumCRC >> 1) ^ 0x1021;
+                    if ((checksumCRC & 0x8000) != 0)
+                        checksumCRC = (checksumCRC << 1) ^ 0x1021;
                     else
-                        checksumCRC = checksumCRC >> 1;
+                        checksumCRC = checksumCRC << 1;
                 }
             }
             return BitConverter.GetBytes(checksumCRC);

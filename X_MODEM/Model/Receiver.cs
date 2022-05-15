@@ -8,6 +8,10 @@ namespace Model
 {
     internal class Receiver
     {
+
+        private readonly int CRC_16_CCITT = 0;
+        private readonly int ALGEBRAIC = 1;
+        
         private SerialPort _portNumber;
 
         public Receiver(string portName, int baudrate)
@@ -41,11 +45,11 @@ namespace Model
                     bool letsStart = false;
                     while (DateTime.Today - start < TimeSpan.FromSeconds(60))
                     {
-                        if (checksumMode == 0)
+                        if (checksumMode == CRC_16_CCITT)
                         {
                             _portNumber.WriteLine(Signals.C.ToString());
                         }
-                        else
+                        else if(checksumMode == ALGEBRAIC)
                         {
                             _portNumber.WriteLine(Signals.NAK.ToString());
                         }
@@ -81,15 +85,13 @@ namespace Model
                             {
                                 for (int i = 0; i < 128; i++)
                                 {
-                                    // wczytywanie pojedynczego znaku z portu do zmiennej helper
                                     int helper = _portNumber.ReadChar();
-                                    // dodawanie wartosci do tymczasowej listy pomocniczej
                                     byteListHelper.Add(Convert.ToByte(helper));
                                 }
 
                                 bool dataCorrectFlag = true;
 
-                                if (checksumMode == 0)
+                                if (checksumMode == CRC_16_CCITT)
                                 {
                                     byte[] checkSumCrc = Checksum.CreateCheckSumCRC(byteListHelper.ToArray());
 
@@ -99,7 +101,7 @@ namespace Model
                                             dataCorrectFlag = false;
                                         }
                                 }
-                                else if (checksumMode == 1)
+                                else if (checksumMode == ALGEBRAIC)
                                 {
                                     byte checksum = (byte)_portNumber.ReadByte();
                                     if (Checksum.AlgebraicChecksum(byteListHelper.ToArray()) != checksum)
